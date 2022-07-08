@@ -21,17 +21,10 @@ namespace Task.DataAccess
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Brigade>().ToTable("Brigade");
-            modelBuilder.Entity<Employee>().ToTable("Employee");
-            modelBuilder.Entity<Customer>().ToTable("Customer");
-            modelBuilder.Entity<Employee>().ToTable("Employee");
-            modelBuilder.Entity<Feedback>().ToTable("Feedback");
-            modelBuilder.Entity<JobPosition>().ToTable("JobPosition");
-            modelBuilder.Entity<Manager>().ToTable("Manager");
-            modelBuilder.Entity<Order>().ToTable("Order");
-            modelBuilder.Entity<OrderTask>().ToTable("OrderTask");
-            modelBuilder.Entity<Specialization>().ToTable("Specialization");
-            modelBuilder.Entity<Task>().ToTable("Task");
+            modelBuilder.Entity<Event>().ToTable("Events");
+            modelBuilder.Entity<EventOrganizer>().ToTable("EventOrganizers");
+            modelBuilder.Entity<Organizer>().ToTable("Organizers");
+            modelBuilder.Entity<Place>().ToTable("Places");
 
             base.OnModelCreating(modelBuilder);
         }
