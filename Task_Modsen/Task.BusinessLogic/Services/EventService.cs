@@ -70,7 +70,7 @@ namespace Task.BusinessLogic.Services
                 Title = _event.Title,
                 Description = _event.Description,
                 OrganizerDtos = organizersByEvent,
-                Place = place.Id,
+                Place = place,
                 TimeOfEvent = _event.TimeOfEvent,
                 
             };
@@ -79,12 +79,21 @@ namespace Task.BusinessLogic.Services
 
         public void CreateEvent(FullEventDto fullEvent)
         {
-            var organizers = _mapper.Map<List<OrganizerDto>>(_organizerRepository
-                .GetAll().Where(x => fullEvent.OrganizerDtos.Any(y => y.Id == x.Id)));
+            var OrganizerDtos = fullEvent.OrganizerDtos;
+            List<OrganizerDto> organizers = _mapper.Map<List<OrganizerDto>>(_organizerRepository
+                .GetAll().ToList());
+            organizers = organizers.Where(x => OrganizerDtos.Any(y => y.Id == x.Id)).ToList();
             var places = _mapper.Map<PlaceDto>(_placeRepository.GetById(fullEvent.Place.Id));
 
-            if (organizers == null || places == null)
+            if (organizers.Count == 0 || places == null)
                 throw new System.Exception("");
+            _eventRepository.Create(new Event
+            {
+                Title = fullEvent.Title,
+                Description = fullEvent.Description,
+                PlaceId = places.Id,
+                TimeOfEvent = fullEvent.TimeOfEvent,
+            });
 
             organizers.ForEach(x => _eventOrganizerRepository
             .Create(new EventOrganizer
@@ -93,13 +102,7 @@ namespace Task.BusinessLogic.Services
                 OrdanizerId = x.Id,
             }));
 
-            _eventRepository.Create(new Event
-            {
-                Title = fullEvent.Title,
-                Description = fullEvent.Description,
-                PlaceId = places.Id,
-                TimeOfEvent = fullEvent.TimeOfEvent,
-            });
+            
         }
 
         public void UpdateEvent(FullEventDto fullEvent)
@@ -108,10 +111,17 @@ namespace Task.BusinessLogic.Services
             {
                 Id = fullEvent.Id,
                 Description = fullEvent.Description,
-                PlaceId = _placeRepository.GetById(fullEvent.Id).Id,
+                PlaceId = _placeRepository.GetById(fullEvent.Place.Id).Id,
                 TimeOfEvent = fullEvent.TimeOfEvent,
                 Title = fullEvent.Title,
             });
+        }
+
+        public void DeleteEvent(int id)
+        {
+            _eventRepository.Delete(id);
+            var eventOrganizers = _eventOrganizerRepository.GetAll().Where(x => x.EventId == id).ToList();
+            eventOrganizers.ForEach(x => _eventOrganizerRepository.Delete(x.Id));
         }
     }
 }

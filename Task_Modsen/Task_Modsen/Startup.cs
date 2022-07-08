@@ -1,9 +1,13 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Task.BusinessLogic;
+using Task.BusinessLogic.Mapper;
+using Task_Modsen.Mapper;
 
 namespace Task_Modsen
 {
@@ -19,6 +23,17 @@ namespace Task_Modsen
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            services.ConfigurateBllManagers(connectionString);
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ApiMapperProfile());
+                mc.AddProfile(new BusinessLogicMapperProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -30,6 +45,8 @@ namespace Task_Modsen
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+           
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

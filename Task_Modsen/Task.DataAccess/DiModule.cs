@@ -7,7 +7,7 @@ namespace Task.DataAccess
 {
     public static class DiModule
     {
-        public static void ConfigurateDalServices(IServiceCollection builder, string _connectionString)
+        public static void ConfigurateDalServices(this IServiceCollection builder, string _connectionString)
         {
             builder.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(_connectionString));
