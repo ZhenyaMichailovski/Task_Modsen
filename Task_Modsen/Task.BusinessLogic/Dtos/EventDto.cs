@@ -1,9 +1,8 @@
 ﻿using System;
-using Task.DataAccess.Interfaces;
 
-namespace Task.DataAccess.Entities
+namespace Task.BusinessLogic.Dtos
 {
-    public class Event : IId
+    public class EventDto
     {
         public int Id { get; set; }
         public string Title { get; set; }

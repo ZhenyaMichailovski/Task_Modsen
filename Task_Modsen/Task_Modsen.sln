@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task.DataAccess", "Task.Dat
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Task.DataBase", "Task.DataBase\Task.DataBase.sqlproj", "{76A8E560-3B00-4665-9872-46E18FED4C38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task.BusinessLogic", "Task.BusinessLogic\Task.BusinessLogic.csproj", "{8962C80A-03F5-4140-9AD6-E773B3AC2603}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{76A8E560-3B00-4665-9872-46E18FED4C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76A8E560-3B00-4665-9872-46E18FED4C38}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76A8E560-3B00-4665-9872-46E18FED4C38}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8962C80A-03F5-4140-9AD6-E773B3AC2603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8962C80A-03F5-4140-9AD6-E773B3AC2603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8962C80A-03F5-4140-9AD6-E773B3AC2603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8962C80A-03F5-4140-9AD6-E773B3AC2603}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

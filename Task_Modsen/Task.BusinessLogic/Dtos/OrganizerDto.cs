@@ -1,8 +1,6 @@
-﻿using Task.DataAccess.Interfaces;
-
-namespace Task.DataAccess.Entities
+﻿namespace Task.BusinessLogic.Dtos
 {
-    public class Organizer : IId
+    public class OrganizerDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

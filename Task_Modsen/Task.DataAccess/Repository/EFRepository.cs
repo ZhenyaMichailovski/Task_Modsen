@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Task.DataAccess.Interfaces;
 
 namespace Task.DataAccess.Repository
@@ -23,7 +19,7 @@ namespace Task.DataAccess.Repository
         {
             return _dbSet.AsNoTracking();
         }
-      
+
         public TEntity GetById(int id)
         {
             return _dbSet.Find(id);

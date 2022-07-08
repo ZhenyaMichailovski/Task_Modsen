@@ -1,8 +1,6 @@
-﻿using Task.DataAccess.Interfaces;
-
-namespace Task.DataAccess.Entities
+﻿namespace Task.BusinessLogic.Dtos
 {
-    public class Place : IId
+    public class PlaceDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
