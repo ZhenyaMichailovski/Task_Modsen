@@ -87,7 +87,7 @@ namespace Task.BusinessLogic.Services
 
             if (organizers.Count == 0 || places == null)
                 throw new System.Exception("");
-            _eventRepository.Create(new Event
+            var id = _eventRepository.Create(new Event
             {
                 Title = fullEvent.Title,
                 Description = fullEvent.Description,
@@ -98,7 +98,7 @@ namespace Task.BusinessLogic.Services
             organizers.ForEach(x => _eventOrganizerRepository
             .Create(new EventOrganizer
             {
-                EventId = fullEvent.Id,
+                EventId = id,
                 OrdanizerId = x.Id,
             }));
 
@@ -119,9 +119,9 @@ namespace Task.BusinessLogic.Services
 
         public void DeleteEvent(int id)
         {
-            _eventRepository.Delete(id);
             var eventOrganizers = _eventOrganizerRepository.GetAll().Where(x => x.EventId == id).ToList();
             eventOrganizers.ForEach(x => _eventOrganizerRepository.Delete(x.Id));
+            _eventRepository.Delete(id);
         }
     }
 }

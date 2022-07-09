@@ -29,7 +29,8 @@ namespace Task.DataAccess.Repository
         {
             _dbSet.Add(item);
             _context.SaveChanges();
-            return 0;
+            
+            return item.Id;
         }
         public void Update(TEntity item)
         {
